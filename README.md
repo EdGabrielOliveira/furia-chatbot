@@ -27,6 +27,8 @@ Esports, desenvolvida com [Next.js](https://nextjs.org), Tailwind CSS e integra√
    yarn install
    # ou
    pnpm install
+   # ou
+   bun install
    ```
 
 3. **Configure as vari√°veis de ambiente:**
@@ -45,6 +47,8 @@ Esports, desenvolvida com [Next.js](https://nextjs.org), Tailwind CSS e integra√
    yarn dev
    # ou
    pnpm dev
+   # ou
+   bun dev
    ```
 
 5. **Acesse no navegador:**
