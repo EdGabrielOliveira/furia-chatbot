@@ -9,6 +9,8 @@ interface InputProps {
   className?: string;
 }
 
+export const InputRing = {};
+
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, onKeyPress, disabled, placeholder, className }, ref) => {
     return (
@@ -20,7 +22,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         onKeyPress={onKeyPress}
         disabled={disabled}
         placeholder={placeholder}
-        className={`w-full p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-zinc-900 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#e0b90b] border border-zinc-800 ${className}`}
+        className={`w-full p-2 sm:p-3 rounded-l-xl focus:bg-zinc-900/70 border-r-0 focus:ring-0 focus:outline-0 bg-zinc-900 text-white
+           placeholder:text-zinc-500 
+            border border-zinc-800 ${className}`}
       />
     );
   },

@@ -69,10 +69,10 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-[100vh] w-full  max-w-4xl mx-auto rounded-xl sm:rounded-2xl bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
+    <div className="flex flex-col h-screen w-full max-w-full min-w-full  bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 to-black opacity-80 z-0"></div>
       <div className="relative z-10 flex flex-col h-full">
-        <div className="bg-black text-white p-3 sm:p-4 flex items-center gap-2 sm:gap-4 border-b border-zinc-800 backdrop-blur-md">
+        <div className="bg-black text-white p-3 gap-4 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 sm:p-4 flex items-center  border-b border-zinc-800 backdrop-blur-md">
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-zinc-900 flex items-center justify-center shadow-lg border border-zinc-700 p-1.5">
             <Image src={Logo} alt="FURIA Logo" width={50} height={50} priority />
           </div>
@@ -103,7 +103,7 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-3 sm:p-5 bg-gradient-to-b from-zinc-900 to-black">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8  bg-gradient-to-b from-zinc-900 to-black">
           <div className="flex flex-col gap-4 sm:gap-5">
             <AnimatePresence>
               {messages.map((message) => (
@@ -246,7 +246,7 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className="bg-black border-t border-zinc-800 px-2 sm:px-4 py-3 sm:py-4 flex items-center">
+        <div className="bg-black border-t border-zinc-800 px-2 py-3 sm:py-4 flex items-center xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 ">
           <Input
             ref={inputRef}
             value={inputValue}

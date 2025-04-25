@@ -4,9 +4,8 @@ import Chat from "./core/components/chat/Chat";
 
 export default function Chatbot() {
   return (
-    <div className="flex items-center justify-center overflow-hidden h-screen min-h-screen chatBG">
+    <div className="flex items-center justify-center overflow-hidden h-screen min-h-screen w-full min-w-full p-0 m-0">
       <Container>
-        <div className="h-[80%]" />
         <Chat />
       </Container>
     </div>

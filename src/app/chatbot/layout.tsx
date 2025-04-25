@@ -1,5 +1,4 @@
 import { Metadata } from "next/types";
-import "./core/styles/chatStyles.css";
 
 export const metadata: Metadata = {
   title: "FURIA - Chatbot",

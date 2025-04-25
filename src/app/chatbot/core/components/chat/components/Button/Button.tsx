@@ -10,14 +10,17 @@ interface ButtonProps {
 
 export default function Button({ type, onClick, disabled }: ButtonProps) {
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className="p-2 cursor-pointer rounded-xl absolute z-10 right-6 bg-[#e0b90be1] hover:bg-white"
-      aria-label="Enviar mensagem"
-    >
-      <VscArrowRight size={20} className="text-black" />
-    </button>
+    <div className="bg-zinc-900 sm:p-[6px] md:p-[6px] rounded-r-2xl border border-zinc-800 border-l-0">
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        className="md:p-2  p-[8px] cursor-pointer rounded-xl bg-[#e0b90be1]
+       hover:bg-white "
+        aria-label="Enviar mensagem"
+      >
+        <VscArrowRight size={20} className="text-black" />
+      </button>
+    </div>
   );
 }
