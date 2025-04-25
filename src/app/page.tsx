@@ -1,14 +1,6 @@
-import React from "react";
-import Container from "./core/components/container/Container";
-import Chat from "./core/components/chat/Chat";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <Container>
-        <div className="h-[80%]" />
-        <Chat />
-      </Container>
-    </div>
-  );
+  redirect("/landing");
+  return null;
 }

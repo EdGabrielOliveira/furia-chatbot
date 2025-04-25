@@ -1,8 +1,8 @@
 import { Metadata } from "next/types";
-import "./globals.css";
+import "./core/styles/chatStyles.css";
 
 export const metadata: Metadata = {
-  title: "FURIA - Chat integrado com IA",
+  title: "FURIA - Chatbot",
   description: "Chatbot com IA para o nosso time Furioso!",
 };
 
