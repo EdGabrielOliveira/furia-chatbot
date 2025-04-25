@@ -19,7 +19,7 @@ export default function HeroSection({ opacity, scale }: HeroSectionProps) {
       <div className="absolute top-20 right-10 w-64 h-64 bg-[#e0b90b]/3 blur-[100px] rounded-full hidden lg:block"></div>
       <div className="absolute -bottom-20 left-10 w-80 h-80 bg-[#e0b90b]/3 blur-[100px] rounded-full hidden lg:block"></div>
 
-      <div className="container mx-auto flex flex-col-reverse justify-between lg:flex-row items-center gap-12 lg:gap-6">
+      <div className="container mx-auto flex flex-col justify-between lg:flex-row items-center gap-12 lg:gap-6">
         <motion.div className="lg:w-1/2 space-y-8 text-center lg:text-left" style={{ opacity, scale }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -127,7 +127,7 @@ export default function HeroSection({ opacity, scale }: HeroSectionProps) {
           </motion.div>
         </motion.div>
 
-        <div className="pr-5 relative">
+        <div className=" hidden xs:hidden sm:hidden md:flex">
           <motion.div
             className="absolute -z-10 -inset-10 bg-[#e0b90b]/5 blur-[60px] rounded-full"
             animate={{
@@ -144,7 +144,9 @@ export default function HeroSection({ opacity, scale }: HeroSectionProps) {
         </div>
       </div>
 
-      <ScrollIndicator />
+      <span className="flex justify-center mt-10 md:mt-0">
+        <ScrollIndicator />
+      </span>
     </section>
   );
 }
