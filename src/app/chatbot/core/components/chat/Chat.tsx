@@ -69,7 +69,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] w-[calc(100%-2rem)]  max-w-4xl mx-auto rounded-xl sm:rounded-2xl bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
+    <div className="flex flex-col h-[100vh] w-full  max-w-4xl mx-auto rounded-xl sm:rounded-2xl bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 to-black opacity-80 z-0"></div>
       <div className="relative z-10 flex flex-col h-full">
         <div className="bg-black text-white p-3 sm:p-4 flex items-center gap-2 sm:gap-4 border-b border-zinc-800 backdrop-blur-md">
