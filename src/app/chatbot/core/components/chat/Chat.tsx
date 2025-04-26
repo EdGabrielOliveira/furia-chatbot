@@ -11,6 +11,26 @@ import Image from "next/image";
 import FanCardGenerator from "./components/Card/FanCardGenerator";
 import { MessageFanCard } from "./components/Card/MessageFanCard";
 import { MessageBubble } from "./components/Quiz/MessageBubble";
+import { VscCreditCard, VscGitPullRequest, VscQuestion, VscTrash } from "react-icons/vsc";
+import { MdQuiz } from "react-icons/md";
+import { SiQuizlet } from "react-icons/si";
+import {
+  Bs0Circle,
+  BsArrow90DegDown,
+  BsArrowClockwise,
+  BsArrowDownCircle,
+  BsCardImage,
+  BsCardList,
+  BsCircleHalf,
+  BsListCheck,
+  BsListNested,
+  BsListUl,
+  BsPuzzle,
+  BsPuzzleFill,
+  BsQuestion,
+  BsTicket,
+  BsTicketFill,
+} from "react-icons/bs";
 
 export default function Chat() {
   const [inputValue, setInputValue] = useState("");
@@ -85,7 +105,7 @@ export default function Chat() {
           <div className="md:w-10 md:h-10 w-20 h-20 sm:w-12 sm:h-12 rounded-full bg-zinc-900 flex items-center justify-center shadow-lg border border-zinc-700 p-1.5">
             <Image src={Logo} alt="FURIA Logo" width={50} height={50} priority />
           </div>
-          <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between">
+          <div className="flex-1 flex flex-col md:flex-row sm:items-start justify-between">
             <div>
               <h3 className="font-bold text-lg sm:text-xl tracking-tight flex items-center">
                 FURIA Chatbot
@@ -97,22 +117,24 @@ export default function Chat() {
             <div className="flex items-center gap-2 mt-2 sm:mt-0">
               <button
                 onClick={handleRefresh}
-                className="text-[10px] sm:text-xs text-white font-bold border-2 hover:border-white border-[#e0b90b] py-1.5 sm:py-2 px-2 cursor-pointer rounded-lg sm:rounded-xl whitespace-nowrap"
+                className="text-[10px] flex flex-row items-center gap-2 sm:text-xs text-white font-bold border-2 hover:border-white border-[#e0b90b] py-1.5 sm:py-2 px-2 cursor-pointer rounded-lg sm:rounded-xl whitespace-nowrap"
               >
+                <VscTrash className="scale-125" />
                 Limpar
               </button>
 
               <button
                 onClick={() => processMessage("Quero criar minha carteirinha de fã")}
-                className="text-[10px] sm:text-xs uppercase text-black font-bold border-2 border-[#e0b90b] bg-[#e0b90b] py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer rounded-lg sm:rounded-xl hover:bg-white hover:text-black hover:border-white whitespace-nowrap"
+                className="text-[10px] flex flex-row items-center gap-2 sm:text-xs uppercase text-black font-bold border-2 border-[#e0b90b] bg-[#e0b90b] py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer rounded-lg sm:rounded-xl hover:bg-white hover:text-black hover:border-white whitespace-nowrap"
               >
-                Carteirinha
+                <BsCardList className="scale-125" /> Carteirinha
               </button>
 
               <button
                 onClick={() => processMessage("Quero fazer o QUIZ!")}
-                className="text-[10px] sm:text-xs uppercase text-black font-bold border-2 border-[#e0b90b] bg-[#e0b90b] py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer rounded-lg sm:rounded-xl hover:bg-white hover:text-black hover:border-white whitespace-nowrap"
+                className="text-[10px] flex flex-row items-center gap-2 sm:text-xs uppercase text-black font-bold border-2 border-[#e0b90b] bg-[#e0b90b] py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer rounded-lg sm:rounded-xl hover:bg-white hover:text-black hover:border-white whitespace-nowrap"
               >
+                <BsPuzzle className="scale-125" />
                 Quiz
               </button>
             </div>
