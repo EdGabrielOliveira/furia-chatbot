@@ -167,7 +167,7 @@ export default function Chat() {
                     <MessageFanCard message={message} onSubmit={completeFanCard} onCancel={cancelFanCardFlow} />
                   ) : message.sender === "bot" ? (
                     <div className="flex gap-2 sm:gap-3">
-                      <div className="w-6 h-6 rounded-full border border-zinc-800 bg-zinc-900 flex-shrink-0 flex items-center justify-center p-1.5">
+                      <div className="w-8 h-8 rounded-full border border-zinc-800 bg-zinc-900 flex-shrink-0 flex items-center justify-center p-1.5">
                         <Image src={Logo} alt="FURIA Logo" width={50} height={50} />
                       </div>
                       <div>

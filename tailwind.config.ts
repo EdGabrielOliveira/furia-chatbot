@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        xs: "370px", // Extra small screens and up
-        sm: "540px", // Small screens and up
+        xs: "320px", // Extra small screens and up
+        sm: "520px", // Small screens and up
         md: "920px", // Medium screens and up
         lg: "1280px", // Large screens and up
         xl: "1920px", // Extra large screens and up
