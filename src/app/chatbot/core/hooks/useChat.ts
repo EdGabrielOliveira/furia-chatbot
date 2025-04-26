@@ -1,13 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { fetchAIResponse } from "../api/router";
+import { useQuiz } from "./quizHook/furiaQuiz";
+import { useFanCard } from "./cardHook/fanCard";
 
 export interface Message {
   id: string;
   text: string;
   sender: "user" | "bot";
   timestamp: Date;
+  isQuiz?: boolean;
+  quizOptions?: string[];
+  quizQuestionId?: string;
+  isFanCard?: boolean;
 }
 
 export interface SuggestionButton {
@@ -99,38 +104,15 @@ const KEYWORD_MAPPINGS = {
     "assistências",
     "headshots",
   ],
+  QUIZ: ["quiz", "teste", "desafio", "conhecimento", "perguntas", "trivia"],
 };
 
 export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [suggestions, setSuggestions] = useState<SuggestionButton[]>(defaultSuggestions);
   const [isLoading, setIsLoading] = useState(false);
-  const [fanCardData, setFanCardData] = useState<{
-    name: string;
-    nickname: string;
-    email: string;
-    since: string;
-    avatarUrl?: string;
-    jogador?: string;
-  } | null>(null);
-  const [fanCardStep, setFanCardStep] = useState<"none" | "name" | "nickname" | "jogador" | "since" | "complete">(
-    "none",
-  );
 
   const generateId = useCallback(() => Math.random().toString(36).substring(2, 11), []);
-
-  useEffect(() => {
-    if (messages.length === 0) {
-      const welcomeMessage: Message = {
-        id: generateId(),
-        text: "🔥 Salve, torcedor da FURIA! Bem-vindo ao chat oficial. Estou aqui para te manter atualizado sobre nosso esquadrão de CS2, próximos jogos, resultados e tudo mais que você quiser saber. O que deseja descobrir hoje sobre a nossa FURIA?",
-        sender: "bot",
-        timestamp: new Date(),
-      };
-
-      setMessages([welcomeMessage]);
-    }
-  }, [generateId]);
 
   const addUserMessage = useCallback(
     (text: string) => {
@@ -162,6 +144,8 @@ export function useChat() {
     [generateId],
   );
 
+  const quizRegex = useMemo(() => /quiz|teste|desafio|conhecimento|perguntas|trivia/i, []);
+
   const updateMessage = useCallback((id: string, text: string) => {
     setMessages((prev) => prev.map((msg) => (msg.id === id ? { ...msg, text } : msg)));
   }, []);
@@ -188,42 +172,57 @@ export function useChat() {
     }
   }, []);
 
-  const startFanCardFlow = useCallback(() => {
-    addBotMessage(
-      "Vamos criar sua carteirinha oficial de fã da FURIA! Preciso de algumas informações. Para começar, qual é o seu nome e sobrenome?",
-    );
-    setFanCardStep("name");
-    setSuggestions([]);
-  }, [addBotMessage]);
+  const { fanCardData, fanCardStep, startFanCardFlow, cancelFanCardFlow, completeFanCard, checkFanCardInput } =
+    useFanCard({
+      addBotMessage,
+      processMessage: addUserMessage,
+      setSuggestions,
+      defaultSuggestions,
+      generateId,
+      setMessages,
+    });
 
-  const cancelFanCardFlow = useCallback(() => {
-    setFanCardStep("none");
-    setFanCardData(null);
-    addBotMessage("Fluxo de criação da carteirinha cancelado. Em que mais posso ajudar?");
-    setSuggestions(defaultSuggestions);
-  }, [addBotMessage]);
+  const {
+    quizActive,
+    quizScore,
+    quizCompleted,
+    currentQuestionIndex,
+    totalQuestions,
+    startQuizFlow,
+    processQuizAnswer,
+    quizAnswered,
+    currentCorrectAnswer,
+    currentSelectedAnswer,
+    checkQuizInput,
+  } = useQuiz({
+    addBotMessage,
+    addUserMessage,
+    setMessages,
+    generateId,
+    setSuggestions,
+    defaultSuggestions,
+  });
 
-  const fanCardRegex = useMemo(() => /carteirinha|fã|fan|card/i, []);
-  const yearRegex = useMemo(() => /\d{4}/, []);
-
-  const processMessage = useCallback(
+  const processUserInput = useCallback(
     async (userInput: string) => {
       if (!userInput.trim() || isLoading) return;
-      addUserMessage(userInput);
 
-      if (fanCardStep !== "none" && fanCardStep !== "complete") {
-        processFanCardResponse(userInput);
+      if (quizRegex.test(userInput.toLowerCase())) {
+        addUserMessage(userInput);
+        startQuizFlow();
+        return;
+      }
+      if (checkQuizInput && checkQuizInput(userInput)) {
         return;
       }
 
+      if (checkFanCardInput && checkFanCardInput(userInput)) {
+        return;
+      }
+
+      addUserMessage(userInput);
       setSuggestions([]);
       setIsLoading(true);
-
-      if (fanCardRegex.test(userInput.toLowerCase())) {
-        setIsLoading(false);
-        startFanCardFlow();
-        return;
-      }
 
       try {
         const { text: aiResponse } = await fetchAIResponse(userInput);
@@ -237,75 +236,69 @@ export function useChat() {
         setIsLoading(false);
       }
     },
-    [isLoading, addUserMessage, addBotMessage, generateNewSuggestions, fanCardStep, startFanCardFlow, fanCardRegex],
+    [
+      isLoading,
+      quizRegex,
+      addUserMessage,
+      addBotMessage,
+      generateNewSuggestions,
+      checkQuizInput,
+      checkFanCardInput,
+      startQuizFlow,
+    ],
   );
 
-  const processFanCardResponse = useCallback(
-    (userInput: string) => {
-      switch (fanCardStep) {
-        case "name":
-          setFanCardData((prev) => ({ ...prev, name: userInput } as any));
-          addBotMessage(`Vamos lá, ${userInput}! Agora me diga, qual é o seu nickname (apelido) como fã?`);
-          setFanCardStep("nickname");
-          break;
-
-        case "nickname":
-          setFanCardData((prev) => ({ ...prev, nickname: userInput } as any));
-          addBotMessage(
-            "Perfeito! Agora queremos saber qual o seu jogador favorito da FURIA? Jogadores atuais: KSCERATO, yuurih, FalleN, molodoy, YEKINDAR",
-          );
-          setFanCardStep("jogador");
-          break;
-
-        case "jogador":
-          setFanCardData((prev) => ({ ...prev, jogador: userInput } as any));
-          addBotMessage("Ótimo! Agora informe a quanto tempo você é fã da FURIA? (ex: 2017, 2020, etc.)");
-          setFanCardStep("since");
-          break;
-
-        case "since": {
-          const yearMatch = userInput.match(yearRegex);
-          const year = yearMatch ? parseInt(yearMatch[0]) : NaN;
-          const currentYear = new Date().getFullYear();
-
-          if (isNaN(year) || year < 2017 || year > currentYear) {
-            addBotMessage(`Por favor, informe um ano válido entre 2017 (quando a FURIA foi fundada) e ${currentYear}:`);
-            return;
-          }
-
-          setFanCardData((prev) => ({ ...prev, since: year.toString() } as any));
-          addBotMessage("🎉 Perfeito! Sua carteirinha está pronta para download!");
-          setFanCardStep("complete");
-          break;
-        }
-
-        default:
-          processMessage(userInput);
-      }
-    },
-    [fanCardStep, addBotMessage, processMessage, yearRegex],
-  );
+  useEffect(() => {}, [processUserInput, checkFanCardInput]);
 
   const processSuggestion = useCallback(
     (suggestionText: string) => {
-      processMessage(suggestionText);
+      processUserInput(suggestionText);
     },
-    [processMessage],
+    [processUserInput],
   );
 
+  useEffect(() => {
+    if (messages.length === 0) {
+      const welcomeMessage: Message = {
+        id: generateId(),
+        text: "🔥 Salve, torcedor da FURIA! Bem-vindo ao chat oficial. Estou aqui para te manter atualizado sobre nosso esquadrão de CS2, próximos jogos, resultados e tudo mais que você quiser saber. O que deseja descobrir hoje sobre a nossa FURIA?",
+        sender: "bot",
+        timestamp: new Date(),
+      };
+
+      setMessages([welcomeMessage]);
+    }
+  }, [generateId]);
+
   return {
+    // Chat base
     messages,
     isLoading,
     suggestions,
-    processMessage,
+    processMessage: processUserInput,
     processSuggestion,
     addUserMessage,
     addBotMessage,
     updateMessage,
     removeMessage,
+
+    // Fan card
     fanCardData,
     fanCardStep,
     cancelFanCardFlow,
     startFanCardFlow,
+    completeFanCard,
+
+    // Quiz
+    quizActive,
+    quizScore,
+    quizCompleted,
+    currentQuestionIndex,
+    totalQuestions,
+    startQuizFlow,
+    processQuizAnswer,
+    quizAnswered,
+    currentCorrectAnswer,
+    currentSelectedAnswer,
   };
 }

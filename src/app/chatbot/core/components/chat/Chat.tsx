@@ -8,7 +8,9 @@ import Button from "./components/Button/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../../../../../../public/logo.webp";
 import Image from "next/image";
-import FanCardGenerator from "../fancard/FanCardGenerator";
+import FanCardGenerator from "./components/Card/FanCardGenerator";
+import { MessageFanCard } from "./components/Card/MessageFanCard";
+import { MessageBubble } from "./components/Quiz/MessageBubble";
 
 export default function Chat() {
   const [inputValue, setInputValue] = useState("");
@@ -17,10 +19,16 @@ export default function Chat() {
     suggestions,
     isLoading,
     processMessage,
-    processSuggestion,
+    processQuizAnswer,
+    currentQuestionIndex,
+    totalQuestions,
+    quizAnswered,
+    currentCorrectAnswer,
+    currentSelectedAnswer,
     fanCardData,
     fanCardStep,
     cancelFanCardFlow,
+    completeFanCard,
   } = useChat();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -62,18 +70,19 @@ export default function Chat() {
 
   const handleSuggestionClick = (text: string) => {
     if (isLoading) return;
-    processSuggestion(text);
+    processMessage(text);
     setTimeout(() => {
       inputRef.current?.focus();
     }, 0);
   };
 
   return (
-    <div className="flex flex-col h-screen w-full max-w-full min-w-full  bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
+    <div className="flex flex-col h-screen w-full max-w-full min-w-full bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 to-black opacity-80 z-0"></div>
       <div className="relative z-10 flex flex-col h-full">
-        <div className="bg-black text-white p-3 gap-4 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 sm:p-4 flex items-center  border-b border-zinc-800 backdrop-blur-md">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-zinc-900 flex items-center justify-center shadow-lg border border-zinc-700 p-1.5">
+        {/* Cabeçalho */}
+        <div className="bg-black text-white p-3 gap-4 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 sm:p-4 flex items-center border-b border-zinc-800 backdrop-blur-md">
+          <div className="md:w-10 md:h-10 w-20 h-20 sm:w-12 sm:h-12 rounded-full bg-zinc-900 flex items-center justify-center shadow-lg border border-zinc-700 p-1.5">
             <Image src={Logo} alt="FURIA Logo" width={50} height={50} priority />
           </div>
           <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between">
@@ -99,11 +108,19 @@ export default function Chat() {
               >
                 Carteirinha
               </button>
+
+              <button
+                onClick={() => processMessage("Quero fazer o QUIZ!")}
+                className="text-[10px] sm:text-xs uppercase text-black font-bold border-2 border-[#e0b90b] bg-[#e0b90b] py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer rounded-lg sm:rounded-xl hover:bg-white hover:text-black hover:border-white whitespace-nowrap"
+              >
+                Quiz
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-3 sm:p-5 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8  bg-gradient-to-b from-zinc-900 to-black">
+        {/* Área de mensagens */}
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 bg-gradient-to-b from-zinc-900 to-black">
           <div className="flex flex-col gap-4 sm:gap-5">
             <AnimatePresence>
               {messages.map((message) => (
@@ -114,9 +131,21 @@ export default function Chat() {
                   transition={{ duration: 0.3 }}
                   className={`max-w-[90%] sm:max-w-[85%] ${message.sender === "user" ? "self-end" : "self-start"}`}
                 >
-                  {message.sender === "bot" && (
+                  {message.isQuiz ? (
+                    <MessageBubble
+                      message={message}
+                      onQuizOptionSelect={processQuizAnswer}
+                      currentQuestionIndex={currentQuestionIndex}
+                      totalQuestions={totalQuestions}
+                      selectedAnswer={currentSelectedAnswer}
+                      correctAnswer={currentCorrectAnswer}
+                      answered={quizAnswered}
+                    />
+                  ) : message.isFanCard ? (
+                    <MessageFanCard message={message} onSubmit={completeFanCard} onCancel={cancelFanCardFlow} />
+                  ) : message.sender === "bot" ? (
                     <div className="flex gap-2 sm:gap-3">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-zinc-800 bg-zinc-900 flex-shrink-0 flex items-center justify-center p-1.5">
+                      <div className="w-6 h-6 rounded-full border border-zinc-800 bg-zinc-900 flex-shrink-0 flex items-center justify-center p-1.5">
                         <Image src={Logo} alt="FURIA Logo" width={50} height={50} />
                       </div>
                       <div>
@@ -140,6 +169,7 @@ export default function Chat() {
                             </ReactMarkdown>
                           </div>
                         </div>
+
                         <div className="text-[8px] sm:text-[10px] mt-1 sm:mt-1.5 text-zinc-500 flex items-center gap-1 sm:gap-1.5 ml-1">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -157,9 +187,7 @@ export default function Chat() {
                         </div>
                       </div>
                     </div>
-                  )}
-
-                  {message.sender === "user" && (
+                  ) : (
                     <div>
                       <div className="bg-white text-black p-3 sm:p-4 rounded-xl sm:rounded-2xl rounded-tr-none shadow-md">
                         <div className="font-normal text-sm sm:text-base">{message.text}</div>
@@ -246,6 +274,7 @@ export default function Chat() {
           </div>
         </div>
 
+        {/* Área de input */}
         <div className="bg-black border-t border-zinc-800 px-2 py-3 sm:py-4 flex items-center xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 ">
           <Input
             ref={inputRef}
@@ -259,7 +288,7 @@ export default function Chat() {
 
           <div className="flex flex-col overflow-hidden relative">
             {fanCardStep === "complete" && fanCardData && (
-              <FanCardGenerator userData={fanCardData} onClose={handleCloseFanCard} />
+              <FanCardGenerator userData={fanCardData} onClose={cancelFanCardFlow} />
             )}
           </div>
 

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { forwardRef } from "react";
 import QRCode from "react-qr-code";
-import { FURIA_LOGO_BASE64 } from "../../utils/logoBase64";
+import { FURIA_LOGO_BASE64 } from "@/app/chatbot/core/utils/logoBase64";
 
 interface FanCardProps {
   name: string;
@@ -14,7 +14,7 @@ interface FanCardProps {
 
 const FanCard = forwardRef<HTMLDivElement, FanCardProps>(
   ({ name, nickname, jogador, since, avatarUrl, cardStyle }, ref) => {
-    const githubUrl = "https://github.com/gabrieloliveiragom";
+    const githubUrl = "https://github.com/edgabrieloliveira";
     const simpleId = Math.random().toString(12).substring(2, 12);
 
     return (

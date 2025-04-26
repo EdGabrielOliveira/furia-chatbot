@@ -9,7 +9,6 @@ interface FanCardGeneratorProps {
   userData: {
     name: string;
     nickname: string;
-    email: string;
     since: string;
     avatarUrl?: string;
     jogador?: string;
