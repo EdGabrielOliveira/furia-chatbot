@@ -25,7 +25,7 @@ Design totalmente responsivo para desktop e dispositivos móveis
 Animações suaves para melhor experiência do usuário
 Suporte a modo escuro nativo
 
-##🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 - Next.js 13+ com App Router
 - React 18+ para interfaces de usuário
@@ -84,16 +84,16 @@ Utilitários:
 5. **Acesse no navegador:**
    - Abra [http://localhost:3000](http://localhost:3000)
 
-##📱 Compatibilidade
+## 📱 Compatibilidade
 ✅ Desktop (Chrome, Firefox, Safari, Edge)
 ✅ Tablets (iOS, Android)
 ✅ Smartphones (iOS, Android)
 ✅ Modo escuro suportado
 
-##📃 Licença
+## 📃 Licença
 Este projeto está licenciado sob a MIT License
 
-##👨‍💻 Autor
+## 👨‍💻 Autor
 Desenvolvido por Gabriel Oliveira
 
 
