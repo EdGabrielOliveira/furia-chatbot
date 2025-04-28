@@ -1,14 +1,44 @@
 # FURIA Chatbot
 
-Este é o repositório do **FURIA Chatbot**, uma plataforma de chat inteligente focada em informações sobre a equipe FURIA
-Esports, desenvolvida com [Next.js](https://nextjs.org), Tailwind CSS e integração com IA.
+FURIA Chatbot é uma plataforma interativa de chat inteligente dedicada a fãs da FURIA Esports, fornecendo informações atualizadas sobre o time, jogadores, competições e muito mais.
+Desenvolvido com tecnologias modernas e design responsivo, o chatbot oferece uma experiência engajadora e personalizada.
 
-## Funcionalidades
+## ✨ Funcionalidades
 
-- Chatbot temático da FURIA Esports
-- Sugestões inteligentes de perguntas
-- Visual moderno, responsivo e dark/gold
-- Deploy fácil na Vercel
+- 🤖 Chat Inteligente
+Respostas contextuais sobre a FURIA Esports e seu cenário competitivo
+Histórico de conversas persistente durante a sessão
+Sugestões inteligentes de perguntas baseadas no contexto da conversa
+- 🎮 Quiz Interativo
+Quiz com perguntas geradas dinamicamente por IA sobre a FURIA
+Perguntas variadas sobre história, jogadores, conquistas e curiosidades
+Sistema de pontuação com feedback imediato
+Resumo detalhado ao final com explicações das respostas
+- 🎫 Carteirinha de Fã
+Crie sua carteirinha personalizada de torcedor da FURIA
+Formulário interativo para inserir seus dados
+Personalização com nome, nickname, tempo como fã e jogador favorito
+Download da carteirinha em formato de imagem PNG.
+- 🎨 Design e UX
+Interface moderna com tema dark/gold nas cores da FURIA
+Design totalmente responsivo para desktop e dispositivos móveis
+Animações suaves para melhor experiência do usuário
+Suporte a modo escuro nativo
+
+##🛠️ Tecnologias Utilizadas
+
+- Next.js 13+ com App Router
+- React 18+ para interfaces de usuário
+- Tailwind CSS para estilização
+- TypeScript para tipagem estática
+- Framer Motion para animações
+
+Utilitários:
+
+- dom-to-image para geração de carteirinhas
+- file-saver para baixar a carterinha
+- react-qr-code para QR codes nas carteirinhas
+
 
 ## Como rodar localmente
 
@@ -54,15 +84,16 @@ Esports, desenvolvida com [Next.js](https://nextjs.org), Tailwind CSS e integra�
 5. **Acesse no navegador:**
    - Abra [http://localhost:3000](http://localhost:3000)
 
-## Deploy na Vercel
+##📱 Compatibilidade
+✅ Desktop (Chrome, Firefox, Safari, Edge)
+✅ Tablets (iOS, Android)
+✅ Smartphones (iOS, Android)
+✅ Modo escuro suportado
 
-1. Faça login em [vercel.com](https://vercel.com)
-2. Clique em **New Project** e importe este repositório do GitHub
-3. Defina as variáveis de ambiente (ex: `GEMINI_API_KEY`)
-4. Clique em **Deploy**
+##📃 Licença
+Este projeto está licenciado sob a MIT License
 
-Acesse a URL gerada pela Vercel para ver seu chatbot online!
+##👨‍💻 Autor
+Desenvolvido por Gabriel Oliveira
 
----
 
-Desenvolvido por Gabriel Oliveira para a comunidade FURIA Esports.
