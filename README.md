@@ -86,14 +86,6 @@ Utilitários:
 5. **Acesse no navegador:**
    - Abra [http://localhost:3000](http://localhost:3000)
 
-## 📱 Compatibilidade
-✅ Desktop (Chrome, Firefox, Safari, Edge)
-✅ Tablets (iOS, Android)
-✅ Smartphones (iOS, Android)
-
-## 📃 Licença
-Este projeto está licenciado sob a MIT License
-
 ## 👨‍💻 Autor
 Desenvolvido por Gabriel Oliveira
 
