@@ -3,7 +3,7 @@
 FURIA Chatbot é uma plataforma interativa de chat inteligente dedicada a fãs da FURIA Esports, fornecendo informações atualizadas sobre o time, jogadores, competições e muito mais.
 Desenvolvido com tecnologias modernas e design responsivo, o chatbot oferece uma experiência engajadora e personalizada.
 
-# Teste o chatbot agora: https://furia-chatbot.vercel.app/landing
+### Teste o chatbot agora: https://furia-chatbot.vercel.app/landing
 
 ## ✨ Funcionalidades
 
