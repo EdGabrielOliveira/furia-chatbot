@@ -28,14 +28,11 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Background effects */}
       <div className="fixed inset-0 bg-gradient-to-br from-[#000000] to-[#080808] -z-10" />
 
-      {/* Floating gradient effects */}
       <div className="fixed -top-[40vh] -left-[20vw] w-[70vw] h-[70vh] bg-[#e0b90b] opacity-[0.02] blur-[120px] rounded-full -z-10" />
       <div className="fixed -bottom-[30vh] -right-[20vw] w-[60vw] h-[60vh] bg-[#e0b90b] opacity-[0.015] blur-[150px] rounded-full -z-10" />
 
-      {/* Componentes da Landing Page */}
       <Header isScrolled={isScrolled} />
       <HeroSection opacity={opacity} scale={scale} />
       <FeaturesSection />

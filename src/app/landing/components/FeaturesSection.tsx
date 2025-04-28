@@ -1,7 +1,8 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
-import { FiMessageSquare, FiAward, FiZap, FiUsers, FiArrowRight } from "react-icons/fi";
+import { FiAward, FiZap, FiUsers, FiArrowRight } from "react-icons/fi";
 import FeatureCard from "./FeatureCard";
+import { BsPuzzle } from "react-icons/bs";
 
 export default function FeaturesSection() {
   const ref = React.useRef(null);
@@ -83,9 +84,9 @@ export default function FeaturesSection() {
           animate={isInView ? "show" : "hidden"}
         >
           <FeatureCard
-            icon={<FiMessageSquare size={28} />}
-            title="Informações em tempo real"
-            description="Receba atualizações sobre resultados, agenda de jogos e novidades da equipe."
+            icon={<BsPuzzle size={28} />}
+            title="Quiz de perguntas"
+            description="Teste seus conhecimentos sobre a FURIA com nosso quiz interativo."
             delay={0}
           />
 

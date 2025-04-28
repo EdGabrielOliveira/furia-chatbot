@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { motion, MotionValue, useInView } from "framer-motion";
-import { FiMessageSquare, FiBarChart2, FiTrendingUp, FiClock, FiCreditCard } from "react-icons/fi";
+import { FiMessageSquare, FiBarChart2, FiTrendingUp, FiCreditCard } from "react-icons/fi";
 import ChatSimulator from "./ChatSimulator";
 import ScrollIndicator from "./ScrollIndicator";
+import { BsPuzzle } from "react-icons/bs";
 
 interface HeroSectionProps {
   opacity: MotionValue<number>;
@@ -87,7 +88,7 @@ export default function HeroSection({ opacity, scale }: HeroSectionProps) {
           >
             <QuickFeature icon={<FiBarChart2 />} text="Estatísticas dos jogadores" />
             <QuickFeature icon={<FiTrendingUp />} text="Rankings atualizados" />
-            <QuickFeature icon={<FiClock />} text="Próximas partidas" />
+            <QuickFeature icon={<BsPuzzle />} text="Quiz sobre a Furia" />
             <QuickFeature icon={<FiCreditCard />} text="Carteirinha de Fã" />
           </motion.div>
 

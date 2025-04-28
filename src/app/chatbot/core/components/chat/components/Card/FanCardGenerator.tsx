@@ -4,6 +4,7 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { FiDownload, FiX, FiCheckCircle } from "react-icons/fi";
 import FanCard from "./FanCard";
+import { BsCardList } from "react-icons/bs";
 
 interface FanCardGeneratorProps {
   userData: {
@@ -131,20 +132,7 @@ const FanCardGenerator: React.FC<FanCardGeneratorProps> = ({ userData, onClose }
           <div className="flex justify-between items-center p-5 border-b border-zinc-800/50">
             <div className="flex items-center gap-3">
               <div className="bg-[#e0b90b]/10 rounded-full p-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#e0b90b"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="3" y="5" width="18" height="14" rx="2" />
-                  <path d="M3 10h18" />
-                </svg>
+                <BsCardList size={20} className="text-[#e0b90b]" />
               </div>
               <h2 className="text-xl font-bold text-white">
                 Carteirinha <span className="text-[#e0b90b]">FURIA</span>

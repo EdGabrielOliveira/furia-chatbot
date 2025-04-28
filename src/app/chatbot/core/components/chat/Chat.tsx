@@ -11,26 +11,8 @@ import Image from "next/image";
 import FanCardGenerator from "./components/Card/FanCardGenerator";
 import { MessageFanCard } from "./components/Card/MessageFanCard";
 import { MessageBubble } from "./components/Quiz/MessageBubble";
-import { VscCreditCard, VscGitPullRequest, VscQuestion, VscTrash } from "react-icons/vsc";
-import { MdQuiz } from "react-icons/md";
-import { SiQuizlet } from "react-icons/si";
-import {
-  Bs0Circle,
-  BsArrow90DegDown,
-  BsArrowClockwise,
-  BsArrowDownCircle,
-  BsCardImage,
-  BsCardList,
-  BsCircleHalf,
-  BsListCheck,
-  BsListNested,
-  BsListUl,
-  BsPuzzle,
-  BsPuzzleFill,
-  BsQuestion,
-  BsTicket,
-  BsTicketFill,
-} from "react-icons/bs";
+import { VscTrash } from "react-icons/vsc";
+import { BsCardList, BsClockFill, BsPuzzle } from "react-icons/bs";
 
 export default function Chat() {
   const [inputValue, setInputValue] = useState("");
@@ -100,7 +82,6 @@ export default function Chat() {
     <div className="flex flex-col h-screen w-full max-w-full min-w-full bg-black overflow-hidden shadow-2xl border border-zinc-800 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 to-black opacity-80 z-0"></div>
       <div className="relative z-10 flex flex-col h-full">
-        {/* Cabeçalho */}
         <div className="bg-black text-white p-3 gap-4 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 sm:p-4 flex items-center border-b border-zinc-800 backdrop-blur-md">
           <div className="md:w-10 md:h-10 w-20 h-20 sm:w-12 sm:h-12 rounded-full bg-zinc-900 flex items-center justify-center shadow-lg border border-zinc-700 p-1.5">
             <Image src={Logo} alt="FURIA Logo" width={50} height={50} priority />
@@ -141,7 +122,6 @@ export default function Chat() {
           </div>
         </div>
 
-        {/* Área de mensagens */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-5 xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 bg-gradient-to-b from-zinc-900 to-black">
           <div className="flex flex-col gap-4 sm:gap-5">
             <AnimatePresence>
@@ -191,43 +171,12 @@ export default function Chat() {
                             </ReactMarkdown>
                           </div>
                         </div>
-
-                        <div className="text-[8px] sm:text-[10px] mt-1 sm:mt-1.5 text-zinc-500 flex items-center gap-1 sm:gap-1.5 ml-1">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className="w-2.5 h-2.5 sm:w-3 sm:h-3"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                        </div>
                       </div>
                     </div>
                   ) : (
                     <div>
                       <div className="bg-white text-black p-3 sm:p-4 rounded-xl sm:rounded-2xl rounded-tr-none shadow-md">
                         <div className="font-normal text-sm sm:text-base">{message.text}</div>
-                      </div>
-                      <div className="text-[8px] sm:text-[10px] mt-1 sm:mt-1.5 text-zinc-400 flex items-center gap-1 sm:gap-1.5 justify-end mr-1">
-                        {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-2.5 h-2.5 sm:w-3 sm:h-3"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
                       </div>
                     </div>
                   )}
@@ -280,7 +229,7 @@ export default function Chat() {
                         whileTap={{ scale: 0.97 }}
                         key={suggestion.id}
                         onClick={() => handleSuggestionClick(suggestion.text)}
-                        className="bg-zinc-900 text-zinc-300 text-[10px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 rounded-md sm:rounded-lg
+                        className="bg-zinc-900 text-zinc-300 text-[8px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 rounded-md sm:rounded-lg
                                  hover:bg-white hover:text-black transition-all duration-300
                                  border border-zinc-800 hover:border-white shadow-md"
                       >
@@ -296,7 +245,6 @@ export default function Chat() {
           </div>
         </div>
 
-        {/* Área de input */}
         <div className="bg-black border-t border-zinc-800 px-2 py-3 sm:py-4 flex items-center xl:px-60 lg:px52 md:px-20 sm:px-20 xs:px-8 ">
           <Input
             ref={inputRef}

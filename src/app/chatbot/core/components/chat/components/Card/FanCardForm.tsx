@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "@public/logo.webp";
+import { BsCardList } from "react-icons/bs";
 
 interface FanCardFormProps {
   onSubmit: (data: { name: string; nickname: string; jogador: string; since: string }) => void;
@@ -73,9 +74,8 @@ export function FanCardForm({ onSubmit, onCancel, timestamp }: FanCardFormProps)
         >
           <div className="flex justify-between items-center mb-4 border-b border-zinc-600 pb-3">
             <div className="flex items-center gap-2">
-              <span className="text-[#e0b90b] text-xl">🎫</span>
-              <span className="bg-[#e0b90b] text-black px-2.5 py-1 rounded-md text-xs sm:text-sm font-medium tracking-wider">
-                CARTEIRINHA FURIA
+              <span className="bg-[#e0b90b] text-black px-2.5 py-1 flex items-center gap-2 rounded-md text-xs sm:text-sm font-medium tracking-wider">
+                <BsCardList /> CARTEIRINHA FURIA
               </span>
             </div>
           </div>
